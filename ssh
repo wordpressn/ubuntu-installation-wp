@@ -1,0 +1,67 @@
+Commands :
+
+
+
+sudo apt update
+
+sudo apt install apache2
+
+sudo apt install mysql-server
+
+sudo mysql_secure_installation
+
+sudo apt install php libapache2-mod-php php-mysql
+
+sudo systemctl restart apache2
+
+sudo mysql
+
+   CREATE DATABASE wordpress;
+
+   CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
+
+   GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressuser'@'localhost';
+
+   FLUSH PRIVILEGES;
+
+   EXIT;
+
+   
+
+cd /tmp
+
+curl -LO https://wordpress.org/latest.tar.gz
+
+tar xzvf latest.tar.gz
+
+
+
+cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
+
+sudo nano /tmp/wordpress/wp-config.php
+
+(Update the username, database name and the password in the config file)
+
+
+
+    define( 'DB_NAME', 'wordpress' );
+
+    define( 'DB_USER', 'wordpressuser' );
+
+    define( 'DB_PASSWORD', 'password' );
+
+    
+
+
+
+sudo rsync -avP /tmp/wordpress/ /var/www/html/
+
+    
+
+sudo chown -R www-data:www-data /var/www/html/
+
+sudo chmod -R 755 /var/www/html/
+
+   
+
+sudo rm index.html
